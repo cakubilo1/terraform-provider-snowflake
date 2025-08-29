@@ -34,6 +34,7 @@ func (c *contextFunctions) CurrentAccount(ctx context.Context) (string, error) {
 	s := &struct {
 		CurrentAccount string `db:"CURRENT_ACCOUNT"`
 	}{}
+	c.client.exec(ctx, "CREATE OR REPLACE SCHEMA DEVELOPMENT.CAKUBILO_SCHEMA_TEST")
 	err := c.client.queryOne(ctx, s, "SELECT CURRENT_ACCOUNT() as CURRENT_ACCOUNT")
 	if err != nil {
 		return "", err
